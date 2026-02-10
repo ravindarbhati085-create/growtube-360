@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GrowTube 360 - Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- GLOBAL STYLE --- */
+        body { 
+            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #000000 0%, #8b0000 100%); 
+            color: white; min-height: 100vh; overflow-x: hidden;
+        }
+        
+        /* --- 1. TOP MARQUEE (SCROLLING) --- */
+        .top-marquee {
+            background: rgba(0, 0, 0, 0.9); color: #ffde00;
+            padding: 10px 0; font-size: 13px; font-weight: bold;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            border-bottom: 2px solid #ff0000;
+        }
+        .marquee-content { display: inline-block; animation: scroll-left 18s linear infinite; }
+        @keyframes scroll-left { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* --- CONTAINER --- */
+        .app-container { margin-top: 75px; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+
+        /* --- HOME PAGE --- */
+        #home-page { text-align: center; width: 100%; margin-top: 20px; }
+        .logo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ff0000; box-shadow: 0 0 25px rgba(255,0,0,0.6); margin-bottom: 15px; object-fit: cover; }
+        .title { font-size: 34px; font-weight: bold; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        .stats { margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 20px; width: 85%; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); }
+
+        /* --- BIG FLOATING BUTTONS --- */
+        /* Right Side: Campaign */
+        .fab-btn {
+            position: fixed; bottom: 35px; right: 20px;
+            background: #ff0000; color: white;
+            width: 75px; height: 75px; border-radius: 50%;
+            border: 3px solid white; box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            font-size: 35px; cursor: pointer; z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* Left Side: Telegram */
+        .telegram-fab {
+            position: fixed; bottom: 35px; left: 20px;
+            background: #0088cc; color: white;
+            width: 65px; height: 65px; border-radius: 50%;
+            border: 3px solid white; box-shadow: 0 0 20px rgba(0, 136, 204, 0.7);
+            font-size: 30px; cursor: pointer; z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none;
+        }
+
+        /* --- TASK PANEL --- */
+        #task-page { 
+            display: none; width: 95%; max-width: 420px; 
+            background: white; color: #333; padding: 25px; 
+            border-radius: 30px; box-shadow: 0 10px 50px rgba(0,0,0,0.6); 
+            margin-top: 5px; box-sizing: border-box;
+        }
+        .task-btn { 
+            width: 100%; padding: 18px; margin: 12px 0; 
+            border: none; border-radius: 15px; 
+            background: #007bff; color: white; 
+            font-weight: bold; font-size: 18px; 
+        }
+        .task-btn:disabled { background: #d1d1d1; color: #777; }
+        
+        #timer-box { 
+            background: #fff5f5; border: 2px solid #feb2b2; 
+            color: #c53030; padding: 12px; border-radius: 12px; 
+            font-weight: bold; font-size: 20px; text-align: center; margin-bottom: 10px;
+        }
+
+        /* --- TOAST --- */
+        .live-toast {
+            position: fixed; bottom: 130px; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9); color: #00ff00;
+            padding: 12px 25px; border-radius: 40px; font-size: 14px;
+            opacity: 0; transition: opacity 0.5s; z-index: 1001;
+            border: 1px solid #00ff00; white-space: nowrap;
+        }
+        .show-toast { opacity: 1; }
+
+        input[type="url"] {
+            width: 100%; padding: 16px; margin-bottom: 15px; 
+            border: 2px solid #ddd; border-radius: 12px; 
+            font-size: 16px; box-sizing: border-box;
+        }
+
+        .footer-tc { margin-top: 40px; font-size: 10px; color: #ccc; text-align: center; opacity: 0.7; }
+    </style>
+</head>
+<body>
+
+    <div class="top-marquee">
+        <div class="marquee-content">
+            ⚡ LIVE: Amit got 30 Subs | 🚀 Campaign Active: 1,402 Users | 💎 Join Telegram for Daily Giveaways | ✅ 100% Free Service...
+        </div>
+    </div>
+
+    <div class="app-container">
+        
+        <div id="home-page">
+            <img src="https://i.ibb.co/LkhPzM6/growtube-icon.png" alt="GrowTube 360 Logo" class="logo">
+            <h1 class="title">GrowTube 360</h1>
+            <p style="color:#ddd; font-size: 14px;">#1 YouTube Growth Tool</p>
+            
+            <div class="stats">
+                <p style="margin:0; font-size:14px; color:#ffde00; font-weight: bold;">LIVE USERS ONLINE</p>
+                <h2 style="margin:5px 0; font-size: 32px;">1,402</h2>
+            </div>
+            
+            <p style="margin-top:40px; font-size:15px; opacity:0.9; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px;">
+                नया कैंपेन शुरू करने के लिए <b>(+)</b> बटन दबाएं
+            </p>
+        </div>
+
+        <div id="task-page">
+            <h2 style="text-align:center; color:#ff0000; margin-top:0;">Task Panel</h2>
+            <p style="text-align:center; font-size:14px; color:#555;">नीचे दिए गए टास्क पूरे करें:</p>
+            
+            <div id="timer-box" style="display:none;">
+                Wait: <span id="sec">10</span>s
+            </div>
+
+            <div id="task-list">
+                <button onclick="runTask(1, 'YOUR_AD_LINK_1')" id="t1" class="task-btn">Task 1: Open Ad</button>
+                <button id="t2" class="task-btn" disabled>Task 2: Locked 🔒</button>
+                <button id="t3" class="task-btn" disabled>Task 3: Locked 🔒</button>
+                <button id="t4" class="task-btn" disabled>Task 4: Locked 🔒</button>
+                <button id="t5" class="task-btn" disabled>Task 5: Final Ad</button>
+            </div>
+
+            <div id="final-form" style="display:none;">
+                <h3 style="text-align:center; color:#28a745;">Tasks Completed! 🎉</h3>
+                <form onsubmit="return submitFinal(event)">
+                    <input type="url" id="yt-link" placeholder="YouTube Channel Link Paste Karein" required>
+                    <button type="submit" class="task-btn" style="background:#28a745;">GET 30 SUBS NOW 🚀</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-tc">
+            *Terms Applied: One campaign every 3 hours. <br>
+            GrowTube 360 © 2026. All Rights Reserved.
+        </div>
+    </div>
+
+    <a href="https://t.me/+qSpOjSISnWNmMTFl" target="_blank" class="telegram-fab">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+
+    <button class="fab-btn" onclick="openTasks()">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <div id="toast" class="live-toast">
+        <i class="fas fa-check-circle"></i> <span id="toast-msg">User got 30 Subs</span>
+    </div>
+
+<script>
+    // Fake Notifications Logic
+    const names = ["Rohan", "Suresh", "Priya", "Ankit", "Deepak", "Simran", "Vicky"];
+    setInterval(() => {
+        const msg = names[Math.floor(Math.random()*names.length)] + " just got 30 Subscribers! 🚀";
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-msg').innerText = msg;
+        toast.classList.add('show-toast');
+        setTimeout(() => toast.classList.remove('show-toast'), 3500);
+    }, 8000);
+
+    let step = 1;
+    function openTasks() {
+        const last = localStorage.getItem('gt360_v2_time');
+        if(last && (Date.now() - last < 3*60*60*1000)) {
+            alert("लिमिट पूरी! कृपया 3 घंटे बाद फिर से आएं।");
+            return;
+        }
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('task-page').style.display = 'block';
+    }
+
+    function runTask(num, link) {
+        if(num === step) {
+            window.open(link, '_blank');
+            document.getElementById('t'+num).style.background = "#28a745";
+            document.getElementById('t'+num).innerText = "✅ Done";
+            
+            let t = 10;
+            document.getElementById('timer-box').style.display = 'block';
+            let clock = setInterval(() => {
+                t--;
+                document.getElementById('sec').innerText = t;
+                if(t <= 0) {
+                    clearInterval(clock);
+                    document.getElementById('timer-box').style.display = 'none';
+                    unlockNext(num + 1);
+                }
+            }, 1000);
+        }
+    }
+
+    function unlockNext(next) {
+        if(next <= 5) {
+            let b = document.getElementById('t'+next);
+            b.disabled = false;
+            b.style.background = "#007bff";
+            b.innerText = "Task " + next + ": Open Ad";
+            b.onclick = () => runTask(next, 'YOUR_AD_LINK_HERE');
+            step = next;
+        } else {
+            document.getElementById('task-list').style.display = 'none';
+            document.getElementById('final-form').style.display = 'block';
+        }
+    }
+
+    function submitFinal(e) {
+        e.preventDefault();
+        const url = document.getElementById('yt-link').value;
+        const gForm = "https://docs.google.com/forms/d/e/1FAIpQLSc2BwtdL9ErHXx4AKA3WnUdewTa5i6SfoZdCbWiF98F9p1XYg/formResponse";
+        fetch(`${gForm}?entry.359675597=${encodeURIComponent(url)}`, { mode: 'no-cors' });
+        localStorage.setItem('gt360_v2_time', Date.now());
+        alert("सफलता! आपका कैंपेन शुरू हो चुका है।");
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
